@@ -4,7 +4,7 @@
 
 **GitHub**: [https://github.com/gianquito](https://github.com/gianquito)
 
-![](https://33333.cdn.cke-cs.com/kSW7V9NHUXugvhoQeFaf/images/e53383d66931f0fb270bf4e9cffede17eefacf40ec331313.png)
+<img src="https://33333.cdn.cke-cs.com/kSW7V9NHUXugvhoQeFaf/images/e53383d66931f0fb270bf4e9cffede17eefacf40ec331313.png"  width="300" height="300">
 
 ### Estructura de carpetas
 
