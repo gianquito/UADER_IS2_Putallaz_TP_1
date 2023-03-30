@@ -22,14 +22,17 @@ def factorial(num):
         return fact 
 
 #Controla que se pase un numero como argumento, sino lo solicita
-min = 0
-max = 0
+min = 1
+max = 60
 if len(sys.argv) < 2:
    print("Debe informar un número!")
    num = (input('Ingrese un rango (ej: 4-8) ')).split('-')
 else:   
     num= sys.argv[1].split('-')
-min = int(num[0])
-max = int(num[1])
+
+if num[0]:
+    min = int(num[0])
+if num[1]:
+    max = int(num[1])
 for i in range(min,max + 1):
     print("Factorial ",i,"! es ", factorial(i)) 
