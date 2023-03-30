@@ -29,4 +29,4 @@ Ademas se encuentra una documentacíón que detalla:
 
 - El paso a paso de la creacion del trabajo práctico.
 - Capturas de pantalla de los resultados de los programas.
-- Links de los commits realizados a GitHub para ver los cambios realizados en el codigo.
+- Links de los commits de GitHub para ver los cambios realizados en el codigo.
