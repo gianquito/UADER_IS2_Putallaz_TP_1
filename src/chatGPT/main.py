@@ -1,6 +1,6 @@
 import openai
 import sys
-#……. [ mas Código de inicialización aqui ] …………
+#Constantes
 openai.api_key = ""
 TOP_P=1
 FREQ_PENALTY=0
@@ -11,24 +11,32 @@ TEMPERATURE=0.75
 NMAX=1
 MODEL_ENGINE = "text-davinci-003"
 
+#El historial que guardará la conversación
 historial = ""
 conversacion = False
+#Comprueba si existe el argumento y activa el modo conversación
 if(len(sys.argv) > 1 and sys.argv[1] == '-convers'):
     conversacion = True
 
+#El ciclo principal del programa
 while(True):
+    #Primer nido try/excecpt, controla que la consulta del usuario sea valida
     try:
+        #Recibe la consulta del usuario
         userText = input('You: ')
         if(userText == ''):
             raise Exception("Cadena vacia")
+        #Segundo nido try/excecpt, controla la manipulacion de la cadena
         try:
+            #Transforma la consulta para darle formato según corresponda
             if(conversacion):
                 userText = historial + 'You: ' + userText + '\nchatGPT:'
                 historial = userText
             else:
                 userText = 'You: ' + userText + '\nchatGPT:'
+            #Tercer nido try/excecpt, llamada a la api
             try:
-                # Set up the model and prompt
+                # Realiza la consulta a la api
                 completion = openai.Completion.create(
                                 engine=MODEL_ENGINE,
                                 prompt=userText,
@@ -39,8 +47,9 @@ while(True):
                                 presence_penalty=PRES_PENALTY,
                                 temperature=TEMPERATURE,
                                 stop=STOP)
-
+                #Muestra la respuesta
                 print('chatGPT:' + completion.choices[0].text)
+                #Agrega la respuesta al historial
                 if(conversacion):
                     historial += completion.choices[0].text + '\n'
             except:
