@@ -1,7 +1,7 @@
 import openai
 import sys
 #……. [ mas Código de inicialización aqui ] …………
-openai.api_key = "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"
+openai.api_key = ""
 TOP_P=1
 FREQ_PENALTY=0
 PRES_PENALTY=0
