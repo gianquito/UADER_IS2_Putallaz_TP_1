@@ -1,5 +1,8 @@
-import openai
+"""
+Este script provee una interfaz para hacer consultas a gpt
+"""
 import sys
+import openai
 #Constantes
 openai.api_key = ""
 TOP_P=1
@@ -13,23 +16,21 @@ MODEL_ENGINE = "text-davinci-003"
 
 #El historial que guardará la conversación
 historial = ""
-conversacion = False
 #Comprueba si existe el argumento y activa el modo conversación
-if(len(sys.argv) > 1 and sys.argv[1] == '-convers'):
-    conversacion = True
+conversacion = len(sys.argv) > 1 and sys.argv[1] == '-convers'
 
 #El ciclo principal del programa
-while(True):
+while True:
     #Primer nido try/excecpt, controla que la consulta del usuario sea valida
     try:
         #Recibe la consulta del usuario
         userText = input('You: ')
-        if(userText == ''):
-            raise Exception("Cadena vacia")
+        if userText == '':
+            raise ValueError("Cadena vacia")
         #Segundo nido try/excecpt, controla la manipulacion de la cadena
         try:
             #Transforma la consulta para darle formato según corresponda
-            if(conversacion):
+            if conversacion:
                 userText = historial + 'You: ' + userText + '\nchatGPT:'
                 historial = userText
             else:
@@ -50,11 +51,11 @@ while(True):
                 #Muestra la respuesta
                 print('chatGPT:' + completion.choices[0].text)
                 #Agrega la respuesta al historial
-                if(conversacion):
+                if conversacion:
                     historial += completion.choices[0].text + '\n'
             except:
                 print("Error llamando a la API")
         except:
             print("Error en el tratamiento de la cadena")
-    except:
-        print("Error en la consulta del usuario")
+    except ValueError as e:
+        print("Error en la consulta:", e)
