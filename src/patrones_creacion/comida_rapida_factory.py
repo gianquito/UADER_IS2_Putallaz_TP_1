@@ -24,11 +24,11 @@ class Creator(ABC):
 #* operativos propiamente dichos
 #*----------------------------------------------------------------
     def some_operation(self) -> str:
-        # Primero se llama al método factory para crear un nuevo objeto Factura.
-        envio = self.factory_method()
+        # Primero se llama al método factory para crear un nuevo objeto Hamburguesa.
+        hamburguesa = self.factory_method()
 
         # A continuación uso el objeto creado invocando la operación específica para el mismo (que no figura definida en la clase que estoy usando).
-        return envio.operation()
+        return hamburguesa.operation()
 
 
 #*-----------------------------------------------------------------------
@@ -56,7 +56,7 @@ class Hamburguesa(ABC):
 
     #*-------------------------------------------------------------------------
     #* Esta es una interfaz que define todos los métodos que son comunes a 
-    #* las facturas independientemente de la condicion impositiva
+    #* las hamburguesas independientemente de el metodo de envio
     #*-------------------------------------------------------------------------
 
     @abstractmethod
@@ -65,7 +65,7 @@ class Hamburguesa(ABC):
 
 
 #*-------------------------------------------------------------------------------
-#* Ahora defino facturas concretas con su respectiva definición de condicion impositiva
+#* Ahora defino hamburguesas concretas con su respectiva definición de metodo de envio
 #*-------------------------------------------------------------------------------
 
 class EntregaMostrador(Hamburguesa):
