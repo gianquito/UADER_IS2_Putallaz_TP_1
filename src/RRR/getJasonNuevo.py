@@ -1,12 +1,54 @@
-# uncompyle6 version 3.9.0
-# Python bytecode version base 2.7 (62211)
-# Decompiled from: Python 3.10.2 (tags/v3.10.2:a58ebcc, Jan 17 2022, 14:12:15) [MSC v.1929 64 bit (AMD64)]
-# Embedded file name: getJason.py
-# Compiled at: 2022-06-14 16:15:55
-import json, sys
-try:
+# -*- coding: utf-8 -*-
+"""
+Extractor de token para acceso API servicios Banco (version 1.0)
+"""
+#Copyright IS2 © 2022,2023 todos los derechos reservados
+import json
+import sys
+class Singleton():
+    """Clase Singleton."""
+    def __init__(self):
+        pass
+    __instancia=None
+
+    @classmethod
+    def crear_instancia(cls):
+        """Crea la instancia de la clase si no existe."""
+        if not cls.__instancia:
+            cls.__instancia=Singleton()
+        return cls.__instancia
+
+    def compute(self):
+        """Muestra la clave asociada al token"""
+        if sys.argv[1] == "-h": #Muestra ayuda
+            print("El programa getJason debe ser invocado mediante: {path ejecutable}/getJason.pyc {path archivo JSON}/{nombre archivo JSON}.json"+
+                    "\nPara obtener ayuda: {path ejecutable}/getJason.pyc -h")
+        else:
+            jsonfile = sys.argv[1]
+            jsonkey = "token1"
+            if len(sys.argv) == 3:
+                jsonkey = sys.argv[2]
+            with open(jsonfile, 'r') as (myfile): #Abre el archivo y lo lee
+                data = myfile.read()
+            obj = json.loads(data)
+            print(str(obj[jsonkey]))#Muestra la clave
+
+class AbstractPrograma:
+    """Branching by abstraction class"""
+    def __init__(self, sin):
+        self.sin = sin
+    def compute(self):
+        """Revisa si el modo debug está activado y usa el metodo correspondiente"""
+        if __debug__ is True:
+            self.sin.compute()
+        else:
+            compute_viejo()
+
+def compute_viejo():
+    """Metodo viejo para mostrar la clave asociada al token"""
     if sys.argv[1] == "-h":
-        print "El programa getJason debe ser invocado mediante: {path ejecutable}/getJason.pyc {path archivo JSON}/{nombre archivo JSON}.json \nPara obtener ayuda: {path ejecutable}/getJason.pyc -h"
+        print("El programa getJason debe ser invocado mediante: {path ejecutable}/getJason.pyc {path archivo JSON}/{nombre archivo JSON}.json"+
+                "\nPara obtener ayuda: {path ejecutable}/getJason.pyc -h")
     else:
         jsonfile = sys.argv[1]
         jsonkey = "token1"
@@ -15,10 +57,17 @@ try:
         with open(jsonfile, 'r') as (myfile):
             data = myfile.read()
         obj = json.loads(data)
-        print str(obj[jsonkey])
+        print(str(obj[jsonkey]))
+
+branching = AbstractPrograma(Singleton().crear_instancia())
+
+try:
+    branching.compute()
 except IndexError:
-    print "Argumentos invalidos"
+    print("Argumentos invalidos")
 except IOError:
-    print "No se encontro el archivo especificado"
+    print("No se encontro el archivo especificado")
 except KeyError:
-    print "No se encontro el token especificado"
+    print("No se encontro el token especificado")
+except:
+    print("Ocurrio un error al ejecutar el programa")
